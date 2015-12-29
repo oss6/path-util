@@ -58,7 +58,7 @@ describe('path-util', function () {
   });
 
   describe('getRoot', function () {
-    
+
     var tests = [
       {args: ['/js/main.js'],           expected: '/'},
       {args: ['/'],                     expected: '/'},
