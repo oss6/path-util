@@ -1,7 +1,7 @@
 # path-util [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 > Utility for pathname manipulations
 
-## Installation
+## Install
 
 ```sh
 $ npm install --save path-util
@@ -11,6 +11,10 @@ $ npm install --save path-util
 
 ```js
 var pathUtil = require('path-util');
+
+var relPath = pathUtil.toRelative('/node/site/../css/style.css', '/node/site');
+console.log(relPath);
+// => '../css/style.css'
 
 var dir = pathUtil.getDirectory('/node/site/style.css');
 console.log(dir);
@@ -22,8 +26,6 @@ console.log(ext);
 
 // ...
 ```
-
-## Documentation
 
 ## License
 
