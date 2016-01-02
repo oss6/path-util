@@ -1,4 +1,4 @@
-# path-util [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# [path-util](https://oss6.github.io/path-util) [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 > Utility for pathname manipulations
 
 ## Install
@@ -24,7 +24,7 @@ var ext = pathUtil.getExtension('/node/site/style.css');
 console.log(ext);
 // => 'css'
 
-// ...
+// and many more (check the docs or even lib/index.js itself)...
 ```
 
 ## License
