@@ -66,4 +66,24 @@ describe('utils', function () {
 
   });
 
+  describe('trimRight', function () {
+
+    var tests = [
+      {args: ['/node/site/style.css   '],     expected: '/node/site/style.css'},
+      {args: ['hello'],                       expected: 'hello'},
+      {args: ['  hello'],                     expected: '  hello'},
+      {args: ['/node/site/style.css__', '_'], expected: '/node/site/style.css'},
+      {args: ['hello', '_'],                  expected: 'hello'},
+      {args: ['__hello'],                     expected: '__hello'}
+    ];
+
+    tests.forEach(function (test) {
+      it('correctly removes trailing characters of ' + test.args[0], function () {
+        var actual = pathUtils.trimRight.apply(null, test.args);
+        assert.equal(actual, test.expected);
+      });
+    });
+
+  });
+
 });

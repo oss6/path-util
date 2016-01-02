@@ -12,8 +12,19 @@ $ npm install --save path-util
 ```js
 var pathUtil = require('path-util');
 
-pathUtil('Rainbow');
+var dir = pathUtil.getDirectory('/node/site/style.css');
+console.log(dir);
+// => '/node/site'
+
+var ext = pathUtil.getExtension('/node/site/style.css');
+console.log(ext);
+// => 'css'
+
+// ...
 ```
+
+## Documentation
+
 ## License
 
 MIT © [oss6](oss6.github.io)

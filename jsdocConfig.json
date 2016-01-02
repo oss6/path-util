@@ -1,0 +1,28 @@
+{
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "source": {
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "opts": {
+    "destination": "./docs/"
+  },
+  "plugins": [],
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": true
+    },
+    "systemName"      : "path-util",
+    "footer"          : "",
+    "copyright"       : "MIT License 2016 - oss6",
+    "navType"         : "vertical",
+    "theme"           : "cosmo",
+    "linenums"        : true,
+    "collapseSymbols" : false,
+    "inverseNav"      : true
+  }
+}

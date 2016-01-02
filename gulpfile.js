@@ -8,14 +8,7 @@ var istanbul = require('gulp-istanbul');
 var nsp = require('gulp-nsp');
 var plumber = require('gulp-plumber');
 var coveralls = require('gulp-coveralls');
-
-gulp.task('static', function () {
-  return gulp.src('**/*.js')
-    .pipe(excludeGitignore())
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
-});
+var jsdoc = require('gulp-jsdoc3');
 
 gulp.task('nsp', function (cb) {
   nsp({package: path.resolve('package.json')}, cb);
@@ -53,5 +46,19 @@ gulp.task('coveralls', ['test'], function () {
     .pipe(coveralls());
 });
 
+gulp.task('static', ['test'], function () {
+  return gulp.src(['lib/**/*.js', 'test/**/*.js'])
+    .pipe(excludeGitignore())
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
+gulp.task('doc', ['static'], function (cb) {
+  var config = require('./jsdocConfig');
+  gulp.src(['README.md', 'lib/index.js'], {read: false})
+    .pipe(jsdoc(config, cb));
+});
+
 gulp.task('prepublish', ['nsp']);
-gulp.task('default', ['static', 'test', 'coveralls']);
+gulp.task('default', ['test', 'coveralls', 'static', 'doc']);
