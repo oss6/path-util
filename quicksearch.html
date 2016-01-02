@@ -1,0 +1,31 @@
+<html>
+<head>
+</head>
+<body style="background: transparent;">
+    <script src="scripts/docstrap.lib.js"></script>
+    <script src="scripts/lunr.min.js"></script>
+    <script src="scripts/fulltext-search.js"></script>
+
+    <script type="text/x-docstrap-searchdb">
+    {"modules.list.html":{"id":"modules.list.html","title":"Modules","body":" path-util Modules path-util Modules × Search results Close "},"index.html":{"id":"index.html","title":"Index","body":" path-util Modules path-util path-util Utility for pathname manipulations Installation$ npm install --save path-utilUsagevar pathUtil = require('path-util'); var dir = pathUtil.getDirectory('/node/site/style.css'); console.log(dir); // =&gt; '/node/site' var ext = pathUtil.getExtension('/node/site/style.css'); console.log(ext); // =&gt; 'css' // ...DocumentationLicenseMIT © oss6 × Search results Close "},"module-path-util.html":{"id":"module-path-util.html","title":"Module: path-util","body":" path-util Modules path-util Module: path-util Defines useful functions for pathname manipulations Version: 0.1.0 Author: Ossama Edbali [ossedb@gmail.com] License: MIT Methods &lt;static&gt; canonicalize(path) Canonicalizes the given path. Parameters: Name Type Description path string Throws: InvalidArgumentException Returns: Type string Example pathUtil.canonicalize('\\node\\site\\..\\css\\style.css'); // =&gt; /node/css/style.css &lt;static&gt; commonPath(paths) Returns the longest common base path of an array of paths. Parameters: Name Type Description paths array An array of paths Throws: InvalidArgumentException Returns: Type string Example pathUtil.commonPath(['/base/path/sub', '/base/path']); // =&gt; '/base/path' &lt;static&gt; commonPrefix(paths) Returns the longest path prefix. Parameters: Name Type Description paths array The paths from which to find the prefix Returns: Type string Example pathUtil.commonPrefix(['foo', 'foobar']); // =&gt; 'foo' &lt;static&gt; getDirectory(path) Return the directory name of `path` Parameters: Name Type Description path string Returns: Type string Example pathUtil.getDirectory('/node/site/style.css'); // =&gt; '/node/site' &lt;static&gt; getExtension(path) Returns the file extension of a given path Parameters: Name Type Description path string Returns: Type string Example pathUtil.getExtension('/node/site.css'); // =&gt; 'css' &lt;static&gt; getFilename(path) Returns the filename of a given path. Parameters: Name Type Description path string Returns: Type string Example pathUtil.getFilename('/node/site/style.css') // =&gt; 'style.css' × Search results Close "}}
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            Searcher.init();
+        });
+
+        $(window).on("message", function(msg) {
+            var msgData = msg.originalEvent.data;
+
+            if (msgData.msgid != "docstrap.quicksearch.start") {
+                return;
+            }
+
+            var results = Searcher.search(msgData.searchTerms);
+
+            window.parent.postMessage({"results": results, "msgid": "docstrap.quicksearch.done"}, "*");
+        });
+    </script>
+</body>
+</html>
