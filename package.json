@@ -1,6 +1,6 @@
 {
   "name": "path-util",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "description": "Utility for pathname manipulations",
   "homepage": "https://oss6.github.io/path-util",
   "author": {
