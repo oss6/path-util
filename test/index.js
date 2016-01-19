@@ -154,6 +154,32 @@ describe('path-util', function () {
 
   });
 
+  /////////////////////////////
+  // ENSURE DIRECTORY ENDING //
+  /////////////////////////////
+
+  describe('ensureDirectoryEnding', function () {
+
+    var tests = [
+      {args: ['/js/main.js'],           expected: '/js/main.js/'},
+      {args: ['\\js'],                  expected: '/js/'},
+      {args: ['\\'],                    expected: '/'},
+      {args: ['/'],                     expected: '/'},
+      {args: [''],                      expected: '/'},
+      {args: ['C:/js/'],                expected: 'C:/js/'},
+      {args: ['C:/js/hello'],           expected: 'C:/js/hello/'},
+      {args: ['file:///css'],           expected: 'file:///css/'}
+    ];
+
+    tests.forEach(function (test) {
+      it('correctly ensures that a path has a directory ending: ' + test.args[0], function () {
+        var actual = path.ensureDirectoryEnding.apply(null, test.args);
+        assert.equal(actual, test.expected);
+      });
+    });
+
+  });
+
   ///////////////////
   // COMMON PREFIX //
   ///////////////////
@@ -369,6 +395,35 @@ describe('path-util', function () {
     it('should throw an exception for empty strings', function () {
       assert.throws(function () {
         path.getSegmentCount('');
+      });
+    });
+
+  });
+
+  //////////////////////////
+  // HAS DIRECTORY ENDING //
+  //////////////////////////
+
+  describe('hasDirectoryEnding', function () {
+
+    var tests = [
+      {args: ['/js/main.js'],           expected: false},
+      {args: ['js/main.js'],            expected: false},
+      {args: ['\\js\\main.js'],         expected: false},
+      {args: ['\\'],                    expected: true},
+      {args: ['/'],                     expected: true},
+      {args: [''],                      expected: false},
+      {args: ['js\\main.js\\'],         expected: true},
+      {args: ['C:/js/main.js'],         expected: false},
+      {args: ['C:/js/hello/main.js/'],  expected: true},
+      {args: ['file:///css/style.css'], expected: false},
+      {args: ['file:///css/'],          expected: true}
+    ];
+
+    tests.forEach(function (test) {
+      it('correctly detect if a path has a directory ending: ' + test.args[0], function () {
+        var actual = path.hasDirectoryEnding.apply(null, test.args);
+        assert.equal(actual, test.expected);
       });
     });
 
@@ -609,6 +664,32 @@ describe('path-util', function () {
     it('should keep the path unchanged', function () {
       var str = '/home/user/docs/';
       assert.equal(path.normalize(str), '/home/user/docs/', 'Already normalized');
+    });
+
+  });
+
+  /////////////////////////////
+  // REMOVE DIRECTORY ENDING //
+  /////////////////////////////
+
+  describe('removeDirectoryEnding', function () {
+
+    var tests = [
+      {args: ['/js/main.js'],           expected: '/js/main.js'},
+      {args: ['\\js'],                  expected: '/js'},
+      {args: ['\\'],                    expected: ''},
+      {args: ['/'],                     expected: ''},
+      {args: [''],                      expected: ''},
+      {args: ['C:/js/'],                expected: 'C:/js'},
+      {args: ['C:/js/hello/'],           expected: 'C:/js/hello'},
+      {args: ['file:///css/'],           expected: 'file:///css'}
+    ];
+
+    tests.forEach(function (test) {
+      it('correctly removes the directory ending of a path (if any): ' + test.args[0], function () {
+        var actual = path.removeDirectoryEnding.apply(null, test.args);
+        assert.equal(actual, test.expected);
+      });
     });
 
   });
