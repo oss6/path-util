@@ -203,6 +203,32 @@ describe('path-util', function () {
 
   });
 
+  //////////////
+  // FROM URI //
+  //////////////
+
+  describe('fromUri', function () {
+
+    var tests = [
+      {args: ['/node/site/style.css'],        expected: '/node/site/style.css'},
+      {args: ['/node/site'],                  expected: '/node/site'},
+      {args: ['/'],                           expected: '/'},
+      {args: ['\\'],                          expected: '/'},
+      {args: [''],                            expected: ''},
+      {args: ['file:///node/site'],           expected: '/node/site'},
+      {args: ['file://C:/node/site'],         expected: 'C:/node/site'},
+      {args: ['file://C:\\node\\site'],       expected: 'C:/node/site'}
+    ];
+
+    tests.forEach(function (test) {
+      it('correctly gets the path from URI: ' + test.args[0], function () {
+        var actual = path.fromUri.apply(null, test.args);
+        assert.equal(actual, test.expected);
+      });
+    });
+
+  });
+
   ///////////////////
   // GET DIRECTORY //
   ///////////////////
@@ -594,6 +620,13 @@ describe('path-util', function () {
   });
 
   //////////
+  // ITER //
+  //////////
+
+  describe('iter', function () {
+  });
+
+  //////////
   // JOIN //
   //////////
 
@@ -920,6 +953,32 @@ describe('path-util', function () {
     it('should throw an exception since the given paths do not have the same root', function () {
       assert.throws(function () {
         path.toRelative('C:/css/style.css', '/node/site');
+      });
+    });
+
+  });
+
+  ////////////
+  // TO URI //
+  ////////////
+
+  describe('toUri', function () {
+
+    var tests = [
+      {args: ['/node/site/style.css'],        expected: 'file:///node/site/style.css'},
+      {args: ['/node/site'],                  expected: 'file:///node/site'},
+      {args: ['/'],                           expected: 'file:///'},
+      {args: ['\\'],                          expected: 'file:///'},
+      {args: [''],                            expected: ''},
+      {args: ['file:///node/site'],           expected: 'file:///node/site'},
+      {args: ['file://C:/node/site'],         expected: 'file://C:/node/site'},
+      {args: ['file://C:\\node\\site'],       expected: 'file://C:/node/site'}
+    ];
+
+    tests.forEach(function (test) {
+      it('correctly gets the URI from path: ' + test.args[0], function () {
+        var actual = path.toUri.apply(null, test.args);
+        assert.equal(actual, test.expected);
       });
     });
 
