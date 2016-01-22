@@ -624,6 +624,26 @@ describe('path-util', function () {
   //////////
 
   describe('iter', function () {
+    it('correctly iterates through the segments of the path', function () {
+      var expected = ['', 'node', 'site', 'style.css'];
+
+      path.iter('/node/site/style.css', function (v, i) {
+        assert.equal(v, expected[i]);
+      });
+
+      expected = ['C:', 'node', 'site', 'style.css'];
+
+      path.iter('C:/node/site/style.css', function (v, i) {
+        assert.equal(v, expected[i]);
+      });
+
+      expected = ['', 'node', 'site', 'style.css'];
+
+      path.iter('file:///node/site/style.css', function (v, i) {
+        assert.equal(v, expected[i]);
+      });
+
+    });
   });
 
   //////////
@@ -967,6 +987,7 @@ describe('path-util', function () {
     var tests = [
       {args: ['/node/site/style.css'],        expected: 'file:///node/site/style.css'},
       {args: ['/node/site'],                  expected: 'file:///node/site'},
+      {args: ['node/site'],                   expected: 'file:///node/site'},
       {args: ['/'],                           expected: 'file:///'},
       {args: ['\\'],                          expected: 'file:///'},
       {args: [''],                            expected: ''},
